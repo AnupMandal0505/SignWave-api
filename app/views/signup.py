@@ -7,8 +7,6 @@ from django.contrib.auth.models import User  # Use Django's default User model
 from django.core.exceptions import ObjectDoesNotExist
 
 class SignupAPI(APIView):
-
-
     def post(self, request):
         try:
             # Extract data from the request
