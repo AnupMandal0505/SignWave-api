@@ -8,6 +8,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 class SignupAPI(APIView):
 
+
     def post(self, request):
         try:
             # Extract data from the request
