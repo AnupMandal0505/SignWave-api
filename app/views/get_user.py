@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect,HttpResponse
 import random
 # from app.models import Patient,Appointment,Department
 from django.contrib import messages
-from app.models import User
+from django.contrib.auth.models import User
 
    
 from rest_framework.response import Response
@@ -23,6 +23,14 @@ def GetUser(request):
     serializer = UserSerializer(user,many= False)
     print(serializer.data)
     return Response({"user":serializer.data})
+
+@api_view(['GET'])
+# @permission_classes([IsAuthenticated])
+def ListUsers(request):
+    us=User.objects.all()
+    serializer = UserSerializer(us,many= True)
+    print(serializer.data)
+    return Response({"list_users":serializer.data})
 
 # def getUserByType(user_ref, filter):
 #     DWC = {
