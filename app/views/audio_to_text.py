@@ -9,9 +9,11 @@ from rest_framework.response import Response
 
 class AudioToTextAPI(APIView):
     def post(self, request):
+        print(7888)
         try:
+            
             audio_file = request.FILES['audio_file']
-
+            print(audio_file)
             # Convert the InMemoryUploadedFile to a BytesIO object
             audio_bytes = BytesIO(audio_file.read())
 

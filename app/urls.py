@@ -1,6 +1,6 @@
 
 from django.urls import path
-from .views import audio_to_text, get_user,signin,signout,chatbot,signup,calling
+from .views import audio_to_text, get_user,signin,signout,chatbot,signup,calling,contact_us
 
 urlpatterns = [
     path("get_user/",get_user.GetUser, name="get_user"),
@@ -10,5 +10,7 @@ urlpatterns = [
     path('audio', audio_to_text.AudioToTextAPI.as_view(), name='audio'),
     path('chatbot', chatbot.ChatbotAPI.as_view(), name='chatbot'),
     path('call', calling.CallingAPI.as_view(), name='call'),
+    path("contact",contact_us.ContactAPI.as_view(),name = "contact"),
+
 ]
 

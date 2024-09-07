@@ -53,7 +53,7 @@ class CallingAPI(APIView):
             if len(data_aux) != n_features:
                 print(f"Feature mismatch: expected {n_features}, got {len(data_aux)}")
                 raise Exception(f"Feature mismatch: expected {n_features}, got {len(data_aux)}")
-
+        
             # Make a prediction based on the model
             prediction = model.predict([np.asarray(data_aux)])
             predicted_character = prediction[0]  # Directly use the string prediction

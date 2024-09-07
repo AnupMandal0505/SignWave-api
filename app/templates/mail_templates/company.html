@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Request</title>
+    <style>
+        body { font-family: Arial, sans-serif; color: #333; margin: 0; padding: 20px; }
+        .container { max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
+        h1 { color: #0074D9; }
+        p { margin: 0; padding: 10px 0; }
+        .footer { margin-top: 20px; font-size: 0.9em; color: #777; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Request for Contact</h1>
+        <p>Dear Sir,</p>
+        <p>I hope this message finds you well. My name is {{ name }}, and I am reaching out to request a follow-up contact regarding {{message}}.</p>
+        <p>Please let me know a convenient time for us to connect or if you prefer, you can contact me directly at {{ phone }} or {{ email }}.</p>
+        <p>Thank you for your attention to this matter. I look forward to hearing from you soon.</p>
+        <p>Best regards,<br>{{ name }}</p>
+        <div class="footer">
+            <p>{{ name }}<br>
+            {{ phone }}<br>
+            {{ email }}</p>
+        </div>
+    </div>
+</body>
+</html>
