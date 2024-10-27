@@ -1,9 +1,6 @@
 import json
-import base64
-import cv2
 import numpy as np
 from channels.generic.websocket import AsyncWebsocketConsumer
-from mediapipe import solutions as mp_solutions
 import pickle
 
 class ASLConsumer(AsyncWebsocketConsumer):
