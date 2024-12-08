@@ -2,4 +2,4 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def home(request):
-    return HttpResponse("Basic Backend Ready!")
+    return render(request,"Site_Maintenance.html")

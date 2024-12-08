@@ -29,12 +29,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # Django settings
-DEBUG = os.getenv('DEBUG') == 'True'
-SECRET_KEY = os.getenv('SECRET_KEY',"test")
+# DEBUG = os.getenv('DEBUG') == 'True'
+# SECRET_KEY = os.getenv('SECRET_KEY',"test")
 
 ALLOWED_HOSTS = ['*']
 # ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
+# Django settings
+DEBUG = os.getenv('DEBUG') == 'True'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
+# ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 
 # Application definition
 
@@ -203,3 +208,4 @@ EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS') == 'True'
 
 
 CORS_ALLOW_ALL_ORIGINS = True
+

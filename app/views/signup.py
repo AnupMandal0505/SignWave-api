@@ -5,17 +5,32 @@ from django.contrib.auth.hashers import make_password
 from rest_framework import status
 from django.contrib.auth.models import User  # Use Django's default User model
 from django.core.exceptions import ObjectDoesNotExist
+from app.models.point import PointRecord
+
+import random
+
+def generate_unique_id():
+    prefix = "sw"
+    random_number = str(random.randint(1000, 9999))  # Random number for additional uniqueness
+    id=prefix + random_number
+    try:
+        user = User.objects.get(username=id)
+        generate_unique_id()
+    except:
+        return id
+
+
 
 class SignupAPI(APIView):
     def post(self, request):
         try:
-            # Extract data from the request
-            username = request.data.get('username')
             email = request.data.get('email')
             password = request.data.get('password')
+            first_name = request.data.get('first_name')
+            last_name = request.data.get('last_name')
             
             # Ensure all required fields are provided
-            if not all([username, email, password]):
+            if not all([email, password]):
                 return Response(
                     {"message": "All fields are required."}, 
                     status=status.HTTP_400_BAD_REQUEST
@@ -23,13 +38,17 @@ class SignupAPI(APIView):
             print(1)
             # Check if user already exists
             try:
-                user = User.objects.get(username=username)
+                user = User.objects.get(email=email)
                 return Response({"message": 'Email is already registered!'}, status=status.HTTP_400_BAD_REQUEST)
             except ObjectDoesNotExist:
                 # Create new user
-                hashed_password = make_password(password)
-                user = User.objects.create(username=username, email=email, password=hashed_password)
+                username = generate_unique_id()
 
+                hashed_password = make_password(password)
+                user = User.objects.create(username=username, email=email, password=hashed_password,first_name=first_name,last_name=last_name)
+                PointRecord.objects.create(
+                            user_ref=user, receiver="Sign Wave", status="success", details="Bonus",balance=0
+                )
                 # Optionally, use a serializer for validation (better practice)
                 user_serializer = UserSerializer(user)
                 return Response(

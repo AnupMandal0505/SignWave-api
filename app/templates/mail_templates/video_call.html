@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Verification</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+    }
+    .email-card {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      border-radius: 10px;
+      background: white;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .email-card img {
+      width: 50px;
+      margin-bottom: 20px;
+    }
+    .email-card h1 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .email-card p {
+      color: #6c757d;
+      font-size: 14px;
+    }
+    .email-card .btn-primary {
+      background-color: #007bff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+    .email-footer {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #adb5bd;
+      padding: 15px;
+      background-color: #f1f3f5;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="p-4">
+    <div class="email-card">
+      <img src="{% static 'home/image/logo-b.ico' %}" alt="Logo" />
+      <h1>Hello {{receiver_name}}😊</h1>
+      <p>We are excited to inform you that your video call has been scheduled successfully. Please use the link below to join the call at the scheduled time:</p>
+      <p class="btn btn-primary text-white"><b>Date:</b>{{date}}<br><b>Time:</b>{{time}}</p>
+      <p class="mt-4">If you have any questions or need assistance, feel free to contact us. Looking forward to our conversation!
+        .</p>
+      <div class="email-footer">
+        Best regards,<br>{{sender_name}}<br>{{sender_email}}
+      </div>
+    </div>
+  </div>
+</body>
+</html>

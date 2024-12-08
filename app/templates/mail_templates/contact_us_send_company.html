@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Verification</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+    }
+
+    .email-card {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      border-radius: 10px;
+      background: white;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .email-card img {
+      width: 50px;
+      margin-bottom: 20px;
+    }
+
+    .email-card h1 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .email-card p {
+      color: #6c757d;
+      font-size: 14px;
+    }
+
+    .email-card .btn-primary {
+      background-color: #007bff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+
+    .email-footer {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #adb5bd;
+      padding: 15px;
+      background-color: #f1f3f5;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="p-4">
+    <div class="email-card">
+      <img src="{% static 'home/image/logo-b.ico' %}" alt="Logo" />
+      <h1>Dear Sir, 😊</h1>
+      <p>I hope this message finds you well. My name is {{ name }}, and I am reaching out to request a follow-up contact
+        regarding {{message}}.</p>
+      <p class="mt-4"> Please let me know a convenient time for us to connect or if you prefer, you can contact me
+        directly at  {{ email }}.<br><br>Thank you for your attention to this matter. I look forward to
+        hearing from you soon.</p>
+      <div class="email-footer">
+        <p>Best regards,<br>{{ name }}</p>
+              {{ email }}
+      </div>
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>
