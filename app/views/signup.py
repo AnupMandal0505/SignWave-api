@@ -39,8 +39,10 @@ class SignupAPI(APIView):
             # Check if user already exists
             try:
                 user = User.objects.get(email=email)
+                print(3)
                 return Response({"message": 'Email is already registered!'}, status=status.HTTP_400_BAD_REQUEST)
             except ObjectDoesNotExist:
+                print(2)
                 # Create new user
                 username = generate_unique_id()
 

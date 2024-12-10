@@ -110,7 +110,7 @@ def video_call_update_mail(request,receiver,meetingtime,sender_email,sender_name
         meetingtime = meetingtime.isoformat()
     elif not isinstance(meetingtime, str):
         # If it's not a string, raise an error
-        return JsonResponse({'error': 'Invalid meeting time format. Expected a string.'}, status=400)
+        raise ValueError("Invalid meeting time format. Expected a string.")
 
     datetime_obj = datetime.fromisoformat(meetingtime)
 
@@ -119,6 +119,6 @@ def video_call_update_mail(request,receiver,meetingtime,sender_email,sender_name
     time = datetime_obj.time()
 
     if not receiver_email or not receiver_name:
-        return JsonResponse({'error': 'Email and name are required.'}, status=400)
+        raise ValueError("Receiver email and name are required.")
     context = {'receiver_name': receiver_name, 'date': date,'time':time, 'email': receiver_email,'sender_name':sender_name,'sender_email':sender_email}
     return send_otp_email(request, 'mail_templates/update_video_call.html', 'Update: Video Call Rescheduled', context)

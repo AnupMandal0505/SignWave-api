@@ -91,17 +91,22 @@ class CreateCallAPI(APIView):
         Update an existing call.
         """
         try:
-            create_call = CreateCall.objects.get(id=id)  # Ensure the user is the sender
+            print("ss")
+            create_call = CreateCall.objects.get(id=id)
+            print("sedsds")
         except CreateCall.DoesNotExist:
             return Response({"error": "Call not found or unauthorized access."}, status=status.HTTP_404_NOT_FOUND)
 
-        serializer = CreateCallSerializer(create_call, data=request.data, partial=True)  # Allow partial updates
+        serializer = CreateCallSerializer(create_call, data=request.data, partial=True)
         if serializer.is_valid():
-            up= serializer.save()
-            us=User.objects.get(username=up.sender)
-            print(up.meetingtime)
-            video_call_update_mail(request,up.receiver,up.meetingtime,us.email,us.first_name)
-            print(15466)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            try:
+                up = serializer.save()
+                us = User.objects.get(username=up.sender)
+                video_call_update_mail(request, up.receiver, up.meetingtime, us.email, us.first_name)
+            except Exception as e:
+                return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
+            # Fetch updated data using the `get` method
+            return self.get(request)  # Call the `get` method
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
