@@ -53,10 +53,12 @@ class CreateCallAPI(APIView):
                     # user_serializer = UserSerializer(user)
                     
                     create_video_callte_mail(request,user.email,user.first_name,meetingtime,sender.email,sender.first_name)
-                    return Response(
-                        {"message": 'Create call Successful!'}, 
-                        status=status.HTTP_201_CREATED
-                    )
+                    # return Response(
+                    #     {"message": 'Create call Successful!'}, 
+                    #     status=status.HTTP_201_CREATED
+                    # )
+
+                    return self.get(request)  # Call the `get` method
 
                 except ObjectDoesNotExist:
                     
@@ -117,3 +119,4 @@ class CreateCallAPI(APIView):
             return self.get(request)  # Call the `get` method
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
