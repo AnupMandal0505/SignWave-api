@@ -39,6 +39,9 @@ ALLOWED_HOSTS = ['signwave-api-ydf3.onrender.com', '127.0.0.1', 'localhost']
 DEBUG = os.getenv('DEBUG') == 'True'
 SECRET_KEY = os.getenv('SECRET_KEY',"test")
 
+CSRF_TRUSTED_ORIGINS = ['https://signwave-api-ydf3.onrender.com']
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 # ALLOWED_HOSTS = ['*']
 # ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
