@@ -48,9 +48,11 @@ class SignupAPI(APIView):
 
                 hashed_password = make_password(password)
                 user = User.objects.create(username=username, email=email, password=hashed_password,first_name=first_name,last_name=last_name)
-                PointRecord.objects.create(
-                            user_ref=user, receiver="Sign Wave", status="success", details="Bonus",balance=0
-                )
+                user.save()
+                print(12354)
+                PointRecord.objects.create(user_ref=user, receiver="New Account", details="Free 5 Call",type_subscription="free",last_subscription_amount=0)
+                print(12354)
+
                 # Optionally, use a serializer for validation (better practice)
                 user_serializer = UserSerializer(user)
                 return Response(

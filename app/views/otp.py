@@ -83,15 +83,18 @@ def payment(request, email, name, transaction_amount, payment_id,bit_coin):
 
 
 def create_video_callte_mail(request,receiver_email,receiver_name,meetingtime,sender_email,sender_name):
-    date_part, time_part = meetingtime.split('T')
+    print("time",meetingtime)
 
-    # Convert the date part and time part into separate datetime objects if needed
-    date = datetime.strptime(date_part, '%Y-%m-%d').date()
-    time = datetime.strptime(time_part, '%H:%M:%S').time()
+    # date_part, time_part = meetingtime.split('T')
+
+    # # Convert the date part and time part into separate datetime objects if needed
+    # date = datetime.strptime(date_part, '%Y-%m-%d').date()
+    # time = datetime.strptime(time_part, '%H:%M:%S').time()
 
     if not receiver_email or not receiver_name:
         return JsonResponse({'error': 'Email and name are required.'}, status=400)
-    context = {'receiver_name': receiver_name, 'date': date,'time':time, 'email': receiver_email,'sender_name':sender_name,'sender_email':sender_email}
+    context = {'receiver_name': receiver_name, 'date': meetingtime,'time':meetingtime, 'email': receiver_email,'sender_name':sender_name,'sender_email':sender_email}
+
     return send_otp_email(request, 'mail_templates/video_call.html', f'{sender_name}: Your 3Video Call', context)
 
 
@@ -105,20 +108,20 @@ def video_call_update_mail(request,receiver,meetingtime,sender_email,sender_name
     receiver_name=user.first_name
 
 # Ensure meetingtime is a string, if it's not, convert it
-    if isinstance(meetingtime, datetime):
-        # If it's already a datetime object, convert it to string in ISO format
-        meetingtime = meetingtime.isoformat()
-    elif not isinstance(meetingtime, str):
-        # If it's not a string, raise an error
-        raise ValueError("Invalid meeting time format. Expected a string.")
+    # if isinstance(meetingtime, datetime):
+    #     # If it's already a datetime object, convert it to string in ISO format
+    #     meetingtime = meetingtime.isoformat()
+    # elif not isinstance(meetingtime, str):
+    #     # If it's not a string, raise an error
+    #     raise ValueError("Invalid meeting time format. Expected a string.")
 
-    datetime_obj = datetime.fromisoformat(meetingtime)
+    # datetime_obj = datetime.fromisoformat(meetingtime)
 
-    # Split the date and time
-    date = datetime_obj.date()   # Extract the date part
-    time = datetime_obj.time()
+    # # Split the date and time
+    # date = datetime_obj.date()   # Extract the date part
+    # time = datetime_obj.time()
 
     if not receiver_email or not receiver_name:
         raise ValueError("Receiver email and name are required.")
-    context = {'receiver_name': receiver_name, 'date': date,'time':time, 'email': receiver_email,'sender_name':sender_name,'sender_email':sender_email}
+    context = {'receiver_name': receiver_name, 'date': meetingtime,'time':meetingtime, 'email': receiver_email,'sender_name':sender_name,'sender_email':sender_email}
     return send_otp_email(request, 'mail_templates/update_video_call.html', 'Update: Video Call Rescheduled', context)

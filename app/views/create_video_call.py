@@ -28,9 +28,11 @@ class CreateCallAPI(APIView):
                     status=status.HTTP_400_BAD_REQUEST
                 )
 
+            print(sender)
             user_point_record = PointRecord.objects.filter(user_ref=request.user).first()
-            print(user_point_record.balance)
-            if user_point_record.balance < 5:
+            print("leftcall")
+            print(user_point_record.left_call)
+            if user_point_record.left_call <= "0":
                 return Response(
                     {
                         "message": "You have reached the maximum coin balance allowed. Please use some coins before buying more."
@@ -38,15 +40,15 @@ class CreateCallAPI(APIView):
                     status=status.HTTP_400_BAD_REQUEST)
             else: 
 
-            
-                # Check if user already exists
                 try:
                     user = User.objects.get(username=receiver)
-                    print(user)
+                    # check=CreateCall.objects.filter(sender=request.user)
+                    # print(check.meetingtime)
+                    # print(",jn")
                     createcall = CreateCall.objects.create(sender=sender, receiver=receiver, message=message,meetingtime=meetingtime)
+                    UsePoints(request, receiver)
+                    print(1237896)
 
-                    UsePoints(user, receiver)
-                    
                     # Optionally, use a serializer for validation (better practice)
                     # user_serializer = UserSerializer(user)
                     
@@ -55,10 +57,11 @@ class CreateCallAPI(APIView):
                         {"message": 'Create call Successful!'}, 
                         status=status.HTTP_201_CREATED
                     )
+
                 except ObjectDoesNotExist:
                     
-                    return Response({"message": 'Invalid Id!'}, status=status.HTTP_400_BAD_REQUEST)
-
+                    return Response({"message": 'Invalid Id!'}, status=status.HTTP_400_BAD_REQUEST)                 
+                
         
         except Exception as e:
             return Response(
@@ -101,7 +104,11 @@ class CreateCallAPI(APIView):
         if serializer.is_valid():
             try:
                 up = serializer.save()
-                us = User.objects.get(username=up.sender)
+                us = User.objects.get(username=create_call.receiver)
+                # print(up.receiver)
+                # print(up.meetingtime)
+                # print(us.email)
+                # print(us.first_name)
                 video_call_update_mail(request, up.receiver, up.meetingtime, us.email, us.first_name)
             except Exception as e:
                 return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)

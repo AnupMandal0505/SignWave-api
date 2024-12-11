@@ -22,7 +22,7 @@ admin.site.register(PaymentRecord, PaymentAdmin)
 
 
 class PointAdmin(admin.ModelAdmin):
-    list_display = ('user_ref', 'receiver','details','bonus','balance','date','status')
+    list_display = ('user_ref', 'receiver','details','type_subscription','left_call','date','last_subscription_amount')
 
 
 admin.site.register(PointRecord, PointAdmin)
