@@ -32,9 +32,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # DEBUG = os.getenv('DEBUG') == 'True'
 # SECRET_KEY = os.getenv('SECRET_KEY',"test")
 
-ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['*']
 
-
+ALLOWED_HOSTS = ['signwave-api-ydf3.onrender.com', '127.0.0.1', 'localhost']
 # Django settings
 DEBUG = os.getenv('DEBUG') == 'True'
 SECRET_KEY = os.getenv('SECRET_KEY',"test")
